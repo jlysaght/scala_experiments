@@ -12,16 +12,19 @@ class Elf extends Creature {
 }
 
 class Human extends Creature {
-} 
+}
 
 trait Iterator[A] {
   def hasNext(): Boolean
+
   def next(): A
 }
 
 class CreatureIterator(creatureList: Array[Creature]) extends Iterator[Creature] {
   private var _current = 0
+
   override def hasNext(): Boolean = (_current < creatureList.size)
+
   override def next(): Creature = {
     if (hasNext()) {
       val tempIndex: Int = _current
@@ -32,12 +35,14 @@ class CreatureIterator(creatureList: Array[Creature]) extends Iterator[Creature]
   }
 }
 
-var creatures: Array[Creature] = new Array[Creature](3)
-creatures(0) = new Human()
-creatures(1) = new Elf()
-creatures(2) = new Orc()
+object Creatures extends App {
+  val creatures: Array[Creature] = new Array[Creature](3)
+  creatures(0) = new Human()
+  creatures(1) = new Elf()
+  creatures(2) = new Orc()
 
-val iter = new CreatureIterator(creatures)
-while (iter.hasNext()) {
-  iter.next().useWeapon()
+  val iter = new CreatureIterator(creatures)
+  while (iter.hasNext()) {
+    iter.next().useWeapon()
+  }
 }
